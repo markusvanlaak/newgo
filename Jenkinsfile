@@ -8,7 +8,7 @@ node {
         }
         stage ('Build') {
         	sh "echo 'shell scripts to build project...'"
-          go build -o test
+          sh "go build -o test main.go"
         }
         stage ('Tests') {
 	        parallel 'static': {
