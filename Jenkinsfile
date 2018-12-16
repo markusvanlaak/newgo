@@ -11,6 +11,7 @@ node {
         }
         stage ('Build') {
         	sh "echo 'shell scripts to build project...'"
+          sh "pwd"
           sh "go build -o test main.go"
         }
         stage ('Tests') {
