@@ -1,4 +1,9 @@
 node {
+  environment {
+    registry = “markusvanlaak/gotest”
+    registryCredential = ‘dockerhub’
+    dockerImage = ‘’
+  }
  	// Clean workspace before doing anything
     deleteDir()
 
@@ -15,23 +20,23 @@ node {
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
         }
-        stage ('Tests') {
-	        parallel 'static': {
-	            sh "echo 'shell scripts to run static tests...'"
-	        },
-	        'unit': {
-	            sh "echo 'shell scripts to run unit tests...'"
-	        },
-	        'integration': {
-	            sh "echo 'shell scripts to run integration tests...'"
-	        }
+        stage(‘Building image’) {
+          steps{
+            script {
+              dockerImage = docker.build registry + “:$BUILD_NUMBER”
+            }
+          }
         }
-        stage ('Docker Image Push') {
-          sh "docker login markusvanlaak/gotest"
-          sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
-          sh "docker push markusvanlaak/gotest"
+        stage(‘Deploy Image’) {
+          steps{
+            script {
+              docker.withRegistry( ‘’, registryCredential ) {
+                dockerImage.push()
+              }
+            }
+          }
         }
-      	stage ('Deploy') {
+        stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
       	}
     } catch (err) {
