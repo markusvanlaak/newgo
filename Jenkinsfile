@@ -28,4 +28,3 @@ pipeline {
             sh "echo 'shell scripts to deploy to server...'"
       	}
     } 
-}
