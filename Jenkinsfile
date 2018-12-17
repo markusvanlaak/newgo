@@ -6,11 +6,13 @@ node {
         stage ('Clone') {
         	checkout scm
         }
-        stage ('Build') {
-        	sh "echo 'shell scripts to build project...'"
-          sh "pwd"
+        stage ('Go Build') {
+        	sh "echo 'shell scripts to build from go source ...'"
           sh "go build -o test main.go"
-          sh "docker build ."
+        }
+        stage ('Docker Image Build') {
+        	sh "echo 'shell scripts to build the docker image...'"
+          sh "pwd"
         }
         stage ('Tests') {
 	        parallel 'static': {
