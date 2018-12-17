@@ -3,7 +3,7 @@ pipeline {
  	  // Clean workspace before doing anything
     //deleteDir()
 
-    try {
+
         stage ('Clone') {
           sh "checkout scm"
           checkout scm
@@ -27,8 +27,5 @@ pipeline {
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
       	}
-    } catch (err) {
-        currentBuild.result = 'FAILED'
-        throw err
-    }
+    } 
 }
