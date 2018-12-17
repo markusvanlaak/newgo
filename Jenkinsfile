@@ -1,9 +1,5 @@
 node {
-  environment {
-    registry = “markusvanlaak/gotest”
-    registryCredential = ‘dockerhub’
-    dockerImage = ‘’
-  }
+  
  	// Clean workspace before doing anything
     deleteDir()
 
