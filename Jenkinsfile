@@ -13,7 +13,7 @@ node {
         stage ('Docker Image Build') {
         	sh "echo 'shell scripts to build the docker image...'"
           sh "pwd"
-          sh "docker build ."
+          sh "docker build -t gotest:${BUILD_ID} ."
         }
         stage ('Tests') {
 	        parallel 'static': {
