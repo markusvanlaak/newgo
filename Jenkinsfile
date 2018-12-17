@@ -17,11 +17,13 @@ pipeline {
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
         }
+        /*
         stage ('Docker Image Push') {
           sh "docker login markusvanlaak/gotest"
           sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           sh "docker push markusvanlaak/gotest"
         }
+        */
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
       	}
