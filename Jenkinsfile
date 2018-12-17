@@ -1,12 +1,7 @@
 pipeline {
-  environment {
-    registry = “markusvanlaak/gotest”
-    registryCredential = ‘dockerhub’
-    dockerImage = ‘’
-  }
-
+    agent { docker { image 'golang' } }
  	  // Clean workspace before doing anything
-    //deleteDir()
+    deleteDir()
 
     try {
         stage ('Clone') {
