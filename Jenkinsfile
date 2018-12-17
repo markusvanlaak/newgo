@@ -1,11 +1,12 @@
 golang {
 
  	  // Clean workspace before doing anything
-    deleteDir()
+    //deleteDir()
 
     try {
         stage ('Clone') {
-        	checkout scm
+          sh "checkout scm"
+          //checkout scm
         }
         stage ('Go Build') {
         	sh "echo 'shell scripts to build from go source ...'"
