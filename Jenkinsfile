@@ -13,7 +13,7 @@ node {
         stage ('Docker Image Build') {
         	sh "echo 'shell scripts to build the docker image...'"
           sh "pwd"
-          sh "docker build -t gotest:${BUILD_ID} ."
+          sh "docker build -t gotest_build:${BUILD_ID} ."
         }
         stage ('Tests') {
 	        parallel 'static': {
@@ -25,6 +25,11 @@ node {
 	        'integration': {
 	            sh "echo 'shell scripts to run integration tests...'"
 	        }
+        }
+        stage ('Docker Image Push') {
+          sh "docker login markusvanlaak/gotest"
+          sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
+          sh "docker push markusvanlaak/gotest"
         }
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
