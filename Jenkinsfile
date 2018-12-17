@@ -1,4 +1,4 @@
-node {
+golang {
 
  	  // Clean workspace before doing anything
     deleteDir()
