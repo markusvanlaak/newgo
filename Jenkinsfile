@@ -1,5 +1,5 @@
 node {
-  
+
  	// Clean workspace before doing anything
     deleteDir()
 
@@ -15,22 +15,6 @@ node {
         	sh "echo 'shell scripts to build the docker image...'"
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
-        }
-        stage(‘Building image’) {
-          steps{
-            script {
-              dockerImage = docker.build registry + “:$BUILD_NUMBER”
-            }
-          }
-        }
-        stage(‘Deploy Image’) {
-          steps{
-            script {
-              docker.withRegistry( ‘’, registryCredential ) {
-                dockerImage.push()
-              }
-            }
-          }
         }
         stage ('Docker Image Push') {
           sh "docker login markusvanlaak/gotest"
