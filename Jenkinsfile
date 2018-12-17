@@ -1,7 +1,7 @@
 pipeline {
     agent { docker { image 'golang' } }
  	  // Clean workspace before doing anything
-    deleteDir()
+    //deleteDir()
 
     try {
         stage ('Clone') {
