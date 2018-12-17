@@ -1,4 +1,9 @@
 golang {
+  environment {
+    registry = “markusvanlaak/gotest”
+    registryCredential = ‘dockerhub’
+    dockerImage = ‘’
+  }
 
  	  // Clean workspace before doing anything
     //deleteDir()
@@ -6,7 +11,7 @@ golang {
     try {
         stage ('Clone') {
           sh "checkout scm"
-          //checkout scm
+          checkout scm
         }
         stage ('Go Build') {
         	sh "echo 'shell scripts to build from go source ...'"
