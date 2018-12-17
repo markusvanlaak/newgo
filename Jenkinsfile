@@ -1,4 +1,4 @@
-golang {
+pipeline {
   environment {
     registry = “markusvanlaak/gotest”
     registryCredential = ‘dockerhub’
