@@ -24,10 +24,12 @@ node {
           //sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           //sh "docker push markusvanlaak/gotest"
           //customImage.push()
-          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
-          }
+          docker.withRegistry('https://registry.example.com', 'dockerhub') {
+
+            def customImage = docker.build("my-image:${env.BUILD_ID}")
+
+            /* Push the container to the custom Registry */
+            customImage.push()
         }
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
