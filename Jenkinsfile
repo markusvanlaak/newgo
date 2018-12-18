@@ -5,7 +5,7 @@ node {
 
     try {
         stage ('Clone') {
-        	checkout scm
+        	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/markusvanlaak/newgo']]])
         }
         stage ('Go Build') {
         	sh "echo 'shell scripts to build from go source ...'"
