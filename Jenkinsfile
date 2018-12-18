@@ -27,6 +27,7 @@ node {
           docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
+          }
         }
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
