@@ -19,9 +19,9 @@ node {
           customImage.push()
         }
         stage ('Docker Image Push') {
-          sh "docker login markusvanlaak/gotest"
-          sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
-          sh "docker push markusvanlaak/gotest"
+          //sh "docker login markusvanlaak/gotest"
+          //sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
+          //sh "docker push markusvanlaak/gotest"
           customImage.push()
         }
       	stage ('Deploy') {
