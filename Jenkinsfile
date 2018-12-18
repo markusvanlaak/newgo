@@ -19,12 +19,10 @@ node {
           customImage.push()
         }
         stage ('Docker Image Push') {
+          docker.withRegistry('https://hub.docker.com/markusvanlaak', 'dockerhub') {
           //sh "docker login markusvanlaak/gotest"
           //sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           //sh "docker push markusvanlaak/gotest"
-          withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
-          //sh 'docker push brightbox/terraform:latest'
-          //sh 'docker push brightbox/cli:latest'
           customImage.push()
         }
       	stage ('Deploy') {
