@@ -15,11 +15,14 @@ node {
         	sh "echo 'shell scripts to build the docker image...'"
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
+          def customImage = docker.build("my-image:${env.BUILD_ID}")
+          customImage.push()
         }
         stage ('Docker Image Push') {
           sh "docker login markusvanlaak/gotest"
           sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           sh "docker push markusvanlaak/gotest"
+          customImage.push()
         }
       	stage ('Deploy') {
             sh "echo 'shell scripts to deploy to server...'"
