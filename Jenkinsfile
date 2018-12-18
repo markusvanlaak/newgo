@@ -15,7 +15,7 @@ node {
         	sh "echo 'shell scripts to build the docker image...'"
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
-          customImage = docker.build("my-image:${env.BUILD_ID}")
+          app = docker.build("my-image:${env.BUILD_ID}")
           //customImage.push()
         }
         stage ('Docker Image Push') {
