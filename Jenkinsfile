@@ -3,7 +3,7 @@ pipeline {
     //agent { docker { image 'golang' } }
  	  // Clean workspace before doing anything
     //deleteDir()
-    stage ('Start') {
+    stages ('Start') {
       steps {
         sh 'pwd'
       }
