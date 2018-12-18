@@ -16,7 +16,7 @@ node {
           sh "pwd"
           sh "docker build -t gotest_build:${BUILD_ID} ."
           customImage = docker.build("my-image:${env.BUILD_ID}")
-          customImage.push()
+          //customImage.push()
         }
         stage ('Docker Image Push') {
           //docker.withRegistry('https://hub.docker.com/markusvanlaak', 'dockerhub') {
