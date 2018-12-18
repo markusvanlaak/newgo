@@ -24,7 +24,7 @@ node {
           //sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           //sh "docker push markusvanlaak/gotest"
           //customImage.push()
-          docker.withRegistry('https://hub.docker.com', 'dockerhub') {
+          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
 
             def customImage = docker.build("my-image:${env.BUILD_ID}")
 
