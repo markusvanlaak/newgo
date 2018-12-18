@@ -24,7 +24,7 @@ node {
           //sh "docker tag gotest:${BUILD_ID} markusvanlaak/gotest"
           //sh "docker push markusvanlaak/gotest"
           //customImage.push()
-          docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
+          docker.withRegistry('https://hub.docker.com', 'dockerhub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
           }
