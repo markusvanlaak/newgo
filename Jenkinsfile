@@ -1,11 +1,10 @@
 pipeline {
-    agent any
-    //agent { docker { image 'golang' } }
- 	  // Clean workspace before doing anything
-    //deleteDir()
-    stages ('Start') {
-      steps {
-        sh 'pwd'
-      }
+    agent { docker { image 'golang' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'go version'
+            }
+        }
     }
-  }
+}
