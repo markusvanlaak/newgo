@@ -1,70 +1,68 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"strconv"
 	"strings"
 )
 
-func timeConversion(s string) string {
-	/*
-	 * Write your code here.
-	 */
-	fmt.Println(s)
-
-	if strings.HasSuffix(s, "PM") {
-		s = strings.TrimSuffix(s, "PM")
-		var hourint int
-		ssplitted := strings.Split(s, ":")
-
-		switch hour := ssplitted[0]; hour {
-		case "01":
-			hourint = 1
-		case "02":
-			hourint = 2
-		case "03":
-			hourint = 3
-		case "04":
-			hourint = 4
-		case "05":
-			hourint = 5
-		case "06":
-			hourint = 6
-		case "07":
-			hourint = 7
-		case "08":
-			hourint = 8
-		case "09":
-			hourint = 9
-		case "10":
-			hourint = 10
-		case "11":
-			hourint = 11
-		case "12":
-			ssplitted[0] = "12"
-			hourint = 12
-		}
-
-		if hourint < 12 {
-			ssplitted[0] = strconv.Itoa(hourint + 12)
-		}
-
-		s = ssplitted[0] + ":" + ssplitted[1] + ":" + ssplitted[2]
+func checkError(err error) {
+	if err != nil {
+		panic(err)
 	}
+}
 
-	if strings.HasSuffix(s, "AM") {
-		s = strings.TrimSuffix(s, "AM")
-		ssplitted := strings.Split(s, ":")
-		if strings.Contains(ssplitted[0], "12") {
-			ssplitted[0] = "00"
+// Complete the staircase function below.
+func staircase(n int32) {
+	var arr []string
+	num := n
+	var s string
+	var i int32
+	var a int32
+	var ii int32
+	var iii int32
+	i = 0
+	for i < num {
+		i = i + 1
+		a = a + 1
+		ii = 0
+		for ii < num-a {
+			s = s + " "
+			ii = ii + 1
 		}
-		s = ssplitted[0] + ":" + ssplitted[1] + ":" + ssplitted[2]
+		ii = 0
+		iii = 0
+		for iii < a {
+			s = s + "#"
+			iii = iii + 1
+		}
+		iii = 0
+		arr = append(arr, s)
+		s = ""
 	}
-	return s
+	//fmt.Println(arr)
+	for _, arrval := range arr {
+		fmt.Println(arrval)
+	}
 }
 
 func main() {
-	s := "12:45:54PM"
-	a := timeConversion(s)
-	fmt.Println(a)
+	//reader := bufio.NewReaderSize(os.Stdin, 1024*1024)
+
+	nTemp, err := strconv.ParseInt(readLine(reader), 10, 64)
+	checkError(err)
+	n := int32(nTemp)
+
+	staircase(n)
+}
+
+func readLine(reader *bufio.Reader) string {
+	str, _, err := reader.ReadLine()
+	if err == io.EOF {
+		return ""
+	}
+
+	return strings.TrimRight(string(str), "\r\n")
 }
