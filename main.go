@@ -1,41 +1,64 @@
-package main
+package bad
 
-import (
-	"strings"
-	"strconv"
+const (
+	AdexpType = 0
+	IcaoType  = 1
 )
 
-func startWith(in, test string) bool {
-	if len(test) > len(in) {
-		return false
-	}
+const upperLevel = 350
 
-	i := 0
-	for range test {
-		if test[i] != in[i] {
-			return false
+type estdata struct {
+	Ptid        string
+	Eto         string
+	FlightLevel int
+}
+
+type geo struct {
+	Geoid     string
+	Latitude  string
+	Longitude string
+}
+
+type rtepts struct {
+	Ptid        string
+	FlightLevel int
+	Eto         string
+}
+
+type Message struct {
+	Type        int
+	Title       string
+	Adep        string
+	Ades        string
+	Alternate   string
+	Arcid       string
+	ArcType     string
+	Ceqpt       string
+	MessageText string
+	Comment     string
+	Eetfir      []string
+	Speed       []string
+	Estdata     []estdata
+	Geo         []geo
+	RoutePoints []rtepts
+}
+
+type simpleToken struct {
+	token string
+	value string
+}
+
+type complexToken struct {
+	token string
+	value []map[string]string
+}
+
+func IsUpperLevel(m Message) bool {
+	for _, r := range m.RoutePoints {
+		if r.FlightLevel > upperLevel {
+			return true
 		}
-		i++
 	}
 
-	return true
-}
-
-func parseLine(in string) (string, string) {
-	if len(in) == 0 {
-		return "", ""
-	}
-
-	i := strings.Index(in, stringEmpty)
-
-	if i == -1 {
-		return in[1:], ""
-	}
-
-	return in[1:i], in[i+1:]
-}
-
-func extractFlightLevel(in string) int {
-	fl, _ := strconv.Atoi(in[1:])
-	return fl
+	return false
 }
